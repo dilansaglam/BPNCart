@@ -1,9 +1,13 @@
-﻿namespace BPNCart.Domain.Entities;
-public class Cart
+﻿using BPNCart.Domain.Entities.Base;
+
+namespace BPNCart.Domain.Entities;
+public class Cart : BaseEntity
 {
-    public int Id { get; set; }
+    public Cart()
+    {
+        CreatedDate = DateTime.Now;
+    }
+
     public int UserId { get; set; }
     public List<Product>? Products { get; set; }
-    public DateTime CreatedDate { get; set; } = DateTime.Now; //set?
-    public DateTime UpdatedDate { get; set; }
 }
