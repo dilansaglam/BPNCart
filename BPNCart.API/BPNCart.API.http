@@ -1,0 +1,6 @@
+@BPNCart.API_HostAddress = http://localhost:5173
+
+GET {{BPNCart.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
