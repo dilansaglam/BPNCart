@@ -1,4 +1,8 @@
 ﻿using BPNCart.Application.Behaviors;
+using BPNCart.Application.Commands;
+using BPNCart.Application.ExternalServices;
+using BPNCart.Application.Validators;
+using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,5 +15,7 @@ public static class ServiceRegistration
             cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ExceptionHandlingAndLogging<,>));
             cfg.RegisterServicesFromAssembly(typeof(ServiceRegistration).Assembly);
         });
+
+        serviceCollection.AddScoped<IValidator<AddProductCommand>, AddProductCommandValidator>();
     }
 }

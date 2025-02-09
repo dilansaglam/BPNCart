@@ -1,5 +1,9 @@
-﻿using BPNCart.Application.Options;
+﻿using BPNCart.Application.ExternalServices;
+using BPNCart.Application.Options;
+using BPNCart.Application.Persistence.Repositories;
+using BPNCart.Infrastructure.ExternalServices;
 using BPNCart.Infrastructure.Persistence.DbContexts;
+using BPNCart.Infrastructure.Persistence.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
@@ -13,5 +17,8 @@ public static class ServiceRegistration
 
         serviceCollection.AddSingleton<IMongoClient>(sp => new MongoClient(configuration.GetConnectionString("MongoDB")));
         serviceCollection.AddSingleton<MongoDbContext>();
+
+        serviceCollection.AddScoped<IStockHttpClient, StockHttpClient>();
+        serviceCollection.AddScoped<ICartRepository, CartRepository>();
     }
 }
