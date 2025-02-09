@@ -1,15 +1,19 @@
-﻿using BPNCart.Domain.Entities;
+﻿using BPNCart.Application.Commands;
+using BPNCart.Domain.Responses.Base;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BPNCart.API.Controllers;
 
 [Route("cart")]
 [ApiController]
-public class CartController : Controller
+public class CartController(IMediator mediator) : Controller
 {
-    [HttpPost("add")]
-    public bool AddProduct(int userId, Product product) //async? 
+    private readonly IMediator _mediator = mediator;
+
+    [HttpPost("addProduct")]
+    public async Task<BaseResponse> AddProduct(AddProductCommand request)
     {
-        return true; //
+        return await _mediator.Send(request);
     }
 }

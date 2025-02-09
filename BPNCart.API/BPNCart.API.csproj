@@ -7,11 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="3.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BPNCart.Application\BPNCart.Application.csproj" />
     <ProjectReference Include="..\BPNCart.Domain\BPNCart.Domain.csproj" />
+    <ProjectReference Include="..\BPNCart.Infrastructure\BPNCart.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
