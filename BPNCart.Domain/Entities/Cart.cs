@@ -6,8 +6,9 @@ public class Cart : BaseEntity
     public Cart()
     {
         CreatedDate = DateTime.Now;
+        Products = []; //
     }
 
     public int UserId { get; set; }
-    public List<Product>? Products { get; set; }
+    public List<Product> Products { get; set; }
 }

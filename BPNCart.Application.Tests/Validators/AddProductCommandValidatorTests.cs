@@ -22,30 +22,6 @@ public class AddProductCommandValidatorTests
     [Theory]
     [InlineData(null)]
     [InlineData("")]
-    public void Should_HaveError_When_UserIdIsNullOrEmpty(string userId)
-    {
-        //Arrange
-        var product = _productFaker
-            .RuleFor(p => p.Barcode, "123")
-            .RuleFor(p => p.Quantity, 1)
-            .Generate();
-        var command = _commandFaker
-            .RuleFor(c => c.Product, product)
-            .RuleFor(c => c.UserId, userId)
-            .Generate();
-
-        //Act
-        var result = _validator.Validate(command);
-        
-        //Assert
-        Assert.False(result.IsValid);
-        Assert.NotEmpty(result.Errors);
-        Assert.Equal(nameof(AddProductCommand.UserId), result.Errors.First().PropertyName);
-    }
-
-    [Theory]
-    [InlineData(null)]
-    [InlineData("")]
     public void Should_HaveError_When_ProductBarcodeIsNullOrEmpty(string barcode)
     {
         //Arrange
@@ -55,7 +31,7 @@ public class AddProductCommandValidatorTests
             .Generate();
         var command = _commandFaker
             .RuleFor(c => c.Product, product)
-            .RuleFor(c => c.UserId, "123")
+            .RuleFor(c => c.UserId, 123)
             .Generate();
 
         //Act
@@ -79,7 +55,7 @@ public class AddProductCommandValidatorTests
             .Generate();
         var command = _commandFaker
             .RuleFor(c => c.Product, product)
-            .RuleFor(c => c.UserId, "123")
+            .RuleFor(c => c.UserId, 123)
             .Generate();
 
         //Act
@@ -102,7 +78,7 @@ public class AddProductCommandValidatorTests
             .Generate();
         var command = _commandFaker
             .RuleFor(c => c.Product, product)
-            .RuleFor(c => c.UserId, "123")
+            .RuleFor(c => c.UserId, 123)
             .Generate();
 
         //Act
