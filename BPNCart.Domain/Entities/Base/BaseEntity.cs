@@ -1,7 +1,12 @@
-﻿namespace BPNCart.Domain.Entities.Base;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+
+namespace BPNCart.Domain.Entities.Base;
 public class BaseEntity
 {
-    public int Id { get; set; }
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public required string Id { get; set; }
     public DateTime CreatedDate { get; set; }
     public DateTime UpdatedDate { get; set; }
     public bool IsDeleted { get; set; }

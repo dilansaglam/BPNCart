@@ -17,19 +17,24 @@ public class AddProductCommandHandler(
 
     public async Task<BaseResponse> Handle(AddProductCommand request, CancellationToken cancellationToken)
     {
-        var result = await _validator.ValidateAsync(request, cancellationToken);
-        if (!result.IsValid)
-            return new BaseResponse { Result = false, Message = $"Request is not valid. {result}" };
+        var validationResult = await _validator.ValidateAsync(request, cancellationToken);
+        if (!validationResult.IsValid)
+            return new BaseResponse { Result = false, Message = $"Request is not valid. {validationResult}" };
 
         var stockCount = _stockHttpClient.GetStockCount(request.Product.Barcode);
         if (stockCount < request.Product.Quantity)
             return new BaseResponse { Result = false, Message = $"Stock is not available. Available stock count: {stockCount}" };
 
-        if (await _cartRepository.DoesProductExistAsync(request.UserId, request.Product.Barcode))
-            await _cartRepository.UpdateProductQuantityAsync(request.UserId, request.Product);
-        else
-            await _cartRepository.AddProductAsync(request.UserId, request.Product);
+        bool dbResult = false;
 
-        return new BaseResponse { Result = true };
+        if (await _cartRepository.DoesProductExistAsync(request.UserId, request.Product.Barcode))
+            dbResult = await _cartRepository.UpdateProductQuantityAsync(request.UserId, request.Product);
+        else
+            dbResult = await _cartRepository.AddProductAsync(request.UserId, request.Product);
+
+        if (dbResult) 
+            return new BaseResponse { Result = true };
+            
+        return new BaseResponse { Result = false , Message = "Cart not found."};
     }
 }

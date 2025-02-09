@@ -5,6 +5,6 @@ public interface ICartRepository
 {
     Task<Cart> GetCart(int userId);
     Task<bool> DoesProductExistAsync(int userId, string barcode);
-    Task AddProductAsync(int userId, Product product);
-    Task UpdateProductQuantityAsync(int userId, Product product);
+    Task<bool> AddProductAsync(int userId, Product product);
+    Task<bool> UpdateProductQuantityAsync(int userId, Product product);
 }

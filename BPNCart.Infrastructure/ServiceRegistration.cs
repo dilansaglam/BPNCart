@@ -15,7 +15,7 @@ public static class ServiceRegistration
     {
         serviceCollection.Configure<MongoDbOptions>(sp => configuration.GetSection("MongoDb").Bind(sp));
 
-        serviceCollection.AddSingleton<IMongoClient>(sp => new MongoClient(configuration.GetConnectionString("MongoDB")));
+        serviceCollection.AddSingleton<IMongoClient>(sp => new MongoClient(configuration["MongoDb:ConnectionString"]));
         serviceCollection.AddSingleton<MongoDbContext>();
 
         serviceCollection.AddScoped<IStockHttpClient, StockHttpClient>();

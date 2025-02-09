@@ -102,6 +102,7 @@ public class AddProductCommandHandlerTests
 
         var cart = _cartFaker.RuleFor(c => c.Products, [product]).Generate();
         _cartRepositoryMock.Setup(c => c.DoesProductExistAsync(It.IsAny<int>(), It.IsAny<string>())).ReturnsAsync(true);
+        _cartRepositoryMock.Setup(c => c.UpdateProductQuantityAsync(It.IsAny<int>(), It.IsAny<Product>())).ReturnsAsync(true);
 
         //Act
         var result = await _handler.Handle(request, CancellationToken.None);
@@ -133,6 +134,7 @@ public class AddProductCommandHandlerTests
 
         var cart = _cartFaker.RuleFor(c => c.Products, [product]).Generate();
         _cartRepositoryMock.Setup(c => c.DoesProductExistAsync(It.IsAny<int>(), It.IsAny<string>())).ReturnsAsync(false);
+        _cartRepositoryMock.Setup(c => c.AddProductAsync(It.IsAny<int>(), It.IsAny<Product>())).ReturnsAsync(true);
 
         //Act
         var result = await _handler.Handle(request, CancellationToken.None);
