@@ -26,4 +26,3 @@ This is a demo shopping cart project. This project only includes add product use
 - Exception Handling
 - Logging
 - Asynchronous Programming
-- 
