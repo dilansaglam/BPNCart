@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BPNCart.Application\BPNCart.Application.csproj" />
-    <ProjectReference Include="..\BPNCart.Domain\BPNCart.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
