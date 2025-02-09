@@ -7,7 +7,6 @@ using BPNCart.Domain.Entities;
 using FluentValidation;
 using FluentValidation.Results;
 using Moq;
-using Xunit.Sdk;
 using ValidationResult = FluentValidation.Results.ValidationResult;
 
 namespace BPNCart.Application.Tests.Handlers;
